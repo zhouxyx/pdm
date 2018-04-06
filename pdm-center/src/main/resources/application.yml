@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: registry
+server:
+  port: 8761
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    #register-with-eureka: false  
+    #fetch-registry: false
+    registerWithEureka: false
+    fetchRegistry: false
+#    serviceUrl: 
+#      defaultZone: http://root:root@127.0.0.1:${server.port}/eureka/
+#      defaultZone: http://127.0.0.1:8761/eureka/
+      
+#security:
+#  basic:
+#    enabled: true
+#  user:
+#    name: root
+#    password: root      
+    
+logging:
+  level:
+    root: INFO    
