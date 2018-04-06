@@ -17,6 +17,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectByPrimaryKey(userUid);
 	}
 	
-	
+	public int saveUser(User user) {
+		
+		return userMapper.insertSelective(user);
+		
+	}
 	
 }
