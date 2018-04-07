@@ -7,4 +7,6 @@ public interface UserService {
 	public User queryUserByUId(String userUid);
 	
 	public int saveUser(User user);
+	
+	public User login(String phone, String password);
 }
