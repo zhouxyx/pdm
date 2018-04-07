@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxx.pdm.plan.mapping.StudyPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.xxx.pdm.plan.model.StudyPlan" >
+    <id column="plan_uid" property="planUid" jdbcType="VARCHAR" />
+    <result column="row_version" property="rowVersion" jdbcType="TIMESTAMP" />
+    <result column="row_status" property="rowStatus" jdbcType="INTEGER" />
+    <result column="user_uid" property="userUid" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="plan" property="plan" jdbcType="VARCHAR" />
+    <result column="complete" property="complete" jdbcType="INTEGER" />
+    <result column="plan_desc" property="planDesc" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    plan_uid, row_version, row_status, user_uid, year, month, plan, complete, plan_desc, 
+    reason
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xxx.pdm.plan.model.StudyPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mg_study_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mg_study_plan
+    where plan_uid = #{planUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mg_study_plan
+    where plan_uid = #{planUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xxx.pdm.plan.model.StudyPlanExample" >
+    delete from mg_study_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xxx.pdm.plan.model.StudyPlan" >
+    insert into mg_study_plan (plan_uid, row_version, row_status, 
+      user_uid, year, month, 
+      plan, complete, plan_desc, 
+      reason)
+    values (#{planUid,jdbcType=VARCHAR}, #{rowVersion,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=INTEGER}, 
+      #{userUid,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
+      #{plan,jdbcType=VARCHAR}, #{complete,jdbcType=INTEGER}, #{planDesc,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxx.pdm.plan.model.StudyPlan" >
+    insert into mg_study_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="planUid != null" >
+        plan_uid,
+      </if>
+      <if test="rowVersion != null" >
+        row_version,
+      </if>
+      <if test="rowStatus != null" >
+        row_status,
+      </if>
+      <if test="userUid != null" >
+        user_uid,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="plan != null" >
+        plan,
+      </if>
+      <if test="complete != null" >
+        complete,
+      </if>
+      <if test="planDesc != null" >
+        plan_desc,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="planUid != null" >
+        #{planUid,jdbcType=VARCHAR},
+      </if>
+      <if test="rowVersion != null" >
+        #{rowVersion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        #{rowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userUid != null" >
+        #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="plan != null" >
+        #{plan,jdbcType=VARCHAR},
+      </if>
+      <if test="complete != null" >
+        #{complete,jdbcType=INTEGER},
+      </if>
+      <if test="planDesc != null" >
+        #{planDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xxx.pdm.plan.model.StudyPlanExample" resultType="java.lang.Integer" >
+    select count(*) from mg_study_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mg_study_plan
+    <set >
+      <if test="record.planUid != null" >
+        plan_uid = #{record.planUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rowVersion != null" >
+        row_version = #{record.rowVersion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rowStatus != null" >
+        row_status = #{record.rowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userUid != null" >
+        user_uid = #{record.userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.plan != null" >
+        plan = #{record.plan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.complete != null" >
+        complete = #{record.complete,jdbcType=INTEGER},
+      </if>
+      <if test="record.planDesc != null" >
+        plan_desc = #{record.planDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mg_study_plan
+    set plan_uid = #{record.planUid,jdbcType=VARCHAR},
+      row_version = #{record.rowVersion,jdbcType=TIMESTAMP},
+      row_status = #{record.rowStatus,jdbcType=INTEGER},
+      user_uid = #{record.userUid,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=INTEGER},
+      plan = #{record.plan,jdbcType=VARCHAR},
+      complete = #{record.complete,jdbcType=INTEGER},
+      plan_desc = #{record.planDesc,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxx.pdm.plan.model.StudyPlan" >
+    update mg_study_plan
+    <set >
+      <if test="rowVersion != null" >
+        row_version = #{rowVersion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        row_status = #{rowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userUid != null" >
+        user_uid = #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="plan != null" >
+        plan = #{plan,jdbcType=VARCHAR},
+      </if>
+      <if test="complete != null" >
+        complete = #{complete,jdbcType=INTEGER},
+      </if>
+      <if test="planDesc != null" >
+        plan_desc = #{planDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where plan_uid = #{planUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxx.pdm.plan.model.StudyPlan" >
+    update mg_study_plan
+    set row_version = #{rowVersion,jdbcType=TIMESTAMP},
+      row_status = #{rowStatus,jdbcType=INTEGER},
+      user_uid = #{userUid,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      plan = #{plan,jdbcType=VARCHAR},
+      complete = #{complete,jdbcType=INTEGER},
+      plan_desc = #{planDesc,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR}
+    where plan_uid = #{planUid,jdbcType=VARCHAR}
+  </update>
+</mapper>
