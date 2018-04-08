@@ -17,8 +17,7 @@ public class PlanServiceImpl implements PlanService {
 
 	@Autowired
 	private StudyPlanMapper studyPlanMapper;
-	
-	
+
 	public List<StudyPlan> findStudyPlansByMonth(int month) {
 		StudyPlanExample example = new StudyPlanExample();
 		example.createCriteria().andMonthEqualTo(month);
@@ -37,4 +36,34 @@ public class PlanServiceImpl implements PlanService {
 		return studyPlanMapper.updateByPrimaryKeySelective(studyPlan);
 	}
 
+	public int updatePlanComplete(String planUid, Integer complete) {
+		StudyPlan dbStudyPlan = studyPlanMapper.selectByPrimaryKey(planUid);
+		Integer currentMonth = DateUtil.getCurrentMonth();
+		Integer currentYear = DateUtil.getCurrentYear();
+		if (dbStudyPlan == null) {
+			return 0;
+		}
+		if (currentMonth.equals(dbStudyPlan.getMonth()) && currentYear.equals(dbStudyPlan.getYear())) {
+			StudyPlan studyPlan = new StudyPlan();
+			studyPlan.setComplete(complete);
+			studyPlan.setPlanUid(planUid);
+			int res = studyPlanMapper.updateByPrimaryKeySelective(studyPlan);
+			return res;
+		} else {
+			return -9;
+		}
+	}
+
+	public Integer queryCurrentMonthPlanComplete(Integer month) {
+		StudyPlanExample example = new StudyPlanExample();
+		example.createCriteria().andMonthEqualTo(month);
+		List<StudyPlan> studyPlans = studyPlanMapper.selectByExample(example);
+		Integer complete = 0;
+		if (studyPlans != null && studyPlans.size() > 0) {
+			for (StudyPlan studyPlan : studyPlans) {
+				complete += studyPlan.getComplete();
+			}
+		}
+		return complete;
+	}
 }

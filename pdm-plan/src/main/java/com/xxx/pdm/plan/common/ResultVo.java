@@ -9,6 +9,25 @@ public class ResultVo {
 	private String message;
 	private Object data;
 
+	
+	public ResultVo(String status) {
+		super();
+		this.status = status;
+	}
+
+	public ResultVo(String status, String message) {
+		super();
+		this.status = status;
+		this.message = message;
+	}
+
+	public ResultVo(String status, String message, Object data) {
+		super();
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
+
 	public ResultVo(Builder builder) {
 		this.status = builder.status;
 		this.message = builder.message;
