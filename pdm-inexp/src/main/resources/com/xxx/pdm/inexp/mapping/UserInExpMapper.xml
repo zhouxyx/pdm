@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxx.pdm.inexp.mapping.UserInExpMapper" >
+  <resultMap id="BaseResultMap" type="com.xxx.pdm.inexp.model.UserInExp" >
+    <id column="user_inexp_uid" property="userInexpUid" jdbcType="VARCHAR" />
+    <result column="row_version" property="rowVersion" jdbcType="TIMESTAMP" />
+    <result column="row_status" property="rowStatus" jdbcType="INTEGER" />
+    <result column="user_uid" property="userUid" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="inexp_title" property="inexpTitle" jdbcType="VARCHAR" />
+    <result column="inexp_type" property="inexpType" jdbcType="CHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="user_inexp_type_uid" property="userInexpTypeUid" jdbcType="VARCHAR" />
+    <result column="inexp_type_name" property="inexpTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_inexp_uid, row_version, row_status, user_uid, year, month, inexp_title, inexp_type, 
+    money, user_inexp_type_uid, inexp_type_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xxx.pdm.inexp.model.UserInExpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mg_user_inexp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mg_user_inexp
+    where user_inexp_uid = #{userInexpUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mg_user_inexp
+    where user_inexp_uid = #{userInexpUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xxx.pdm.inexp.model.UserInExpExample" >
+    delete from mg_user_inexp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xxx.pdm.inexp.model.UserInExp" >
+    insert into mg_user_inexp (user_inexp_uid, row_version, row_status, 
+      user_uid, year, month, 
+      inexp_title, inexp_type, money, 
+      user_inexp_type_uid, inexp_type_name)
+    values (#{userInexpUid,jdbcType=VARCHAR}, #{rowVersion,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=INTEGER}, 
+      #{userUid,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
+      #{inexpTitle,jdbcType=VARCHAR}, #{inexpType,jdbcType=CHAR}, #{money,jdbcType=DECIMAL}, 
+      #{userInexpTypeUid,jdbcType=VARCHAR}, #{inexpTypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxx.pdm.inexp.model.UserInExp" >
+    insert into mg_user_inexp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userInexpUid != null" >
+        user_inexp_uid,
+      </if>
+      <if test="rowVersion != null" >
+        row_version,
+      </if>
+      <if test="rowStatus != null" >
+        row_status,
+      </if>
+      <if test="userUid != null" >
+        user_uid,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="inexpTitle != null" >
+        inexp_title,
+      </if>
+      <if test="inexpType != null" >
+        inexp_type,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="userInexpTypeUid != null" >
+        user_inexp_type_uid,
+      </if>
+      <if test="inexpTypeName != null" >
+        inexp_type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userInexpUid != null" >
+        #{userInexpUid,jdbcType=VARCHAR},
+      </if>
+      <if test="rowVersion != null" >
+        #{rowVersion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        #{rowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userUid != null" >
+        #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="inexpTitle != null" >
+        #{inexpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="inexpType != null" >
+        #{inexpType,jdbcType=CHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="userInexpTypeUid != null" >
+        #{userInexpTypeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="inexpTypeName != null" >
+        #{inexpTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xxx.pdm.inexp.model.UserInExpExample" resultType="java.lang.Integer" >
+    select count(*) from mg_user_inexp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mg_user_inexp
+    <set >
+      <if test="record.userInexpUid != null" >
+        user_inexp_uid = #{record.userInexpUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rowVersion != null" >
+        row_version = #{record.rowVersion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rowStatus != null" >
+        row_status = #{record.rowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userUid != null" >
+        user_uid = #{record.userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.inexpTitle != null" >
+        inexp_title = #{record.inexpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inexpType != null" >
+        inexp_type = #{record.inexpType,jdbcType=CHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userInexpTypeUid != null" >
+        user_inexp_type_uid = #{record.userInexpTypeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inexpTypeName != null" >
+        inexp_type_name = #{record.inexpTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mg_user_inexp
+    set user_inexp_uid = #{record.userInexpUid,jdbcType=VARCHAR},
+      row_version = #{record.rowVersion,jdbcType=TIMESTAMP},
+      row_status = #{record.rowStatus,jdbcType=INTEGER},
+      user_uid = #{record.userUid,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=INTEGER},
+      inexp_title = #{record.inexpTitle,jdbcType=VARCHAR},
+      inexp_type = #{record.inexpType,jdbcType=CHAR},
+      money = #{record.money,jdbcType=DECIMAL},
+      user_inexp_type_uid = #{record.userInexpTypeUid,jdbcType=VARCHAR},
+      inexp_type_name = #{record.inexpTypeName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxx.pdm.inexp.model.UserInExp" >
+    update mg_user_inexp
+    <set >
+      <if test="rowVersion != null" >
+        row_version = #{rowVersion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        row_status = #{rowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userUid != null" >
+        user_uid = #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="inexpTitle != null" >
+        inexp_title = #{inexpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="inexpType != null" >
+        inexp_type = #{inexpType,jdbcType=CHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="userInexpTypeUid != null" >
+        user_inexp_type_uid = #{userInexpTypeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="inexpTypeName != null" >
+        inexp_type_name = #{inexpTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_inexp_uid = #{userInexpUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxx.pdm.inexp.model.UserInExp" >
+    update mg_user_inexp
+    set row_version = #{rowVersion,jdbcType=TIMESTAMP},
+      row_status = #{rowStatus,jdbcType=INTEGER},
+      user_uid = #{userUid,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      inexp_title = #{inexpTitle,jdbcType=VARCHAR},
+      inexp_type = #{inexpType,jdbcType=CHAR},
+      money = #{money,jdbcType=DECIMAL},
+      user_inexp_type_uid = #{userInexpTypeUid,jdbcType=VARCHAR},
+      inexp_type_name = #{inexpTypeName,jdbcType=VARCHAR}
+    where user_inexp_uid = #{userInexpUid,jdbcType=VARCHAR}
+  </update>
+</mapper>
