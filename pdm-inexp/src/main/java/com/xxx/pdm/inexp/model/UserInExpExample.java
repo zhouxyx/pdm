@@ -3,6 +3,7 @@ package com.xxx.pdm.inexp.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class UserInExpExample {
@@ -104,6 +105,32 @@ public class UserInExpExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andUserInexpUidIsNull() {
@@ -823,6 +850,66 @@ public class UserInExpExample {
 
         public Criteria andInexpTypeNameNotBetween(String value1, String value2) {
             addCriterion("inexp_type_name not between", value1, value2, "inexpTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateIsNull() {
+            addCriterion("inexp_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateIsNotNull() {
+            addCriterion("inexp_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateEqualTo(Date value) {
+            addCriterionForJDBCDate("inexp_date =", value, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("inexp_date <>", value, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("inexp_date >", value, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("inexp_date >=", value, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateLessThan(Date value) {
+            addCriterionForJDBCDate("inexp_date <", value, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("inexp_date <=", value, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateIn(List<Date> values) {
+            addCriterionForJDBCDate("inexp_date in", values, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("inexp_date not in", values, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("inexp_date between", value1, value2, "inexpDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInexpDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("inexp_date not between", value1, value2, "inexpDate");
             return (Criteria) this;
         }
     }

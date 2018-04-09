@@ -26,6 +26,8 @@ public class UserInExp {
 
     private String inexpTypeName;
 
+    private Date inexpDate;
+
     public String getUserInexpUid() {
         return userInexpUid;
     }
@@ -112,5 +114,13 @@ public class UserInExp {
 
     public void setInexpTypeName(String inexpTypeName) {
         this.inexpTypeName = inexpTypeName;
+    }
+
+    public Date getInexpDate() {
+        return inexpDate;
+    }
+
+    public void setInexpDate(Date inexpDate) {
+        this.inexpDate = inexpDate;
     }
 }

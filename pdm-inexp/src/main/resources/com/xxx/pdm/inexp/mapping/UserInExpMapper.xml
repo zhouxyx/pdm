@@ -13,6 +13,7 @@
     <result column="money" property="money" jdbcType="DECIMAL" />
     <result column="user_inexp_type_uid" property="userInexpTypeUid" jdbcType="VARCHAR" />
     <result column="inexp_type_name" property="inexpTypeName" jdbcType="VARCHAR" />
+    <result column="inexp_date" property="inexpDate" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     user_inexp_uid, row_version, row_status, user_uid, year, month, inexp_title, inexp_type, 
-    money, user_inexp_type_uid, inexp_type_name
+    money, user_inexp_type_uid, inexp_type_name, inexp_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xxx.pdm.inexp.model.UserInExpExample" >
     select
@@ -110,11 +111,13 @@
     insert into mg_user_inexp (user_inexp_uid, row_version, row_status, 
       user_uid, year, month, 
       inexp_title, inexp_type, money, 
-      user_inexp_type_uid, inexp_type_name)
+      user_inexp_type_uid, inexp_type_name, inexp_date
+      )
     values (#{userInexpUid,jdbcType=VARCHAR}, #{rowVersion,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=INTEGER}, 
       #{userUid,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
       #{inexpTitle,jdbcType=VARCHAR}, #{inexpType,jdbcType=CHAR}, #{money,jdbcType=DECIMAL}, 
-      #{userInexpTypeUid,jdbcType=VARCHAR}, #{inexpTypeName,jdbcType=VARCHAR})
+      #{userInexpTypeUid,jdbcType=VARCHAR}, #{inexpTypeName,jdbcType=VARCHAR}, #{inexpDate,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxx.pdm.inexp.model.UserInExp" >
     insert into mg_user_inexp
@@ -152,6 +155,9 @@
       <if test="inexpTypeName != null" >
         inexp_type_name,
       </if>
+      <if test="inexpDate != null" >
+        inexp_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userInexpUid != null" >
@@ -186,6 +192,9 @@
       </if>
       <if test="inexpTypeName != null" >
         #{inexpTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="inexpDate != null" >
+        #{inexpDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -231,6 +240,9 @@
       <if test="record.inexpTypeName != null" >
         inexp_type_name = #{record.inexpTypeName,jdbcType=VARCHAR},
       </if>
+      <if test="record.inexpDate != null" >
+        inexp_date = #{record.inexpDate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +260,8 @@
       inexp_type = #{record.inexpType,jdbcType=CHAR},
       money = #{record.money,jdbcType=DECIMAL},
       user_inexp_type_uid = #{record.userInexpTypeUid,jdbcType=VARCHAR},
-      inexp_type_name = #{record.inexpTypeName,jdbcType=VARCHAR}
+      inexp_type_name = #{record.inexpTypeName,jdbcType=VARCHAR},
+      inexp_date = #{record.inexpDate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +299,9 @@
       <if test="inexpTypeName != null" >
         inexp_type_name = #{inexpTypeName,jdbcType=VARCHAR},
       </if>
+      <if test="inexpDate != null" >
+        inexp_date = #{inexpDate,jdbcType=DATE},
+      </if>
     </set>
     where user_inexp_uid = #{userInexpUid,jdbcType=VARCHAR}
   </update>
@@ -300,7 +316,8 @@
       inexp_type = #{inexpType,jdbcType=CHAR},
       money = #{money,jdbcType=DECIMAL},
       user_inexp_type_uid = #{userInexpTypeUid,jdbcType=VARCHAR},
-      inexp_type_name = #{inexpTypeName,jdbcType=VARCHAR}
+      inexp_type_name = #{inexpTypeName,jdbcType=VARCHAR},
+      inexp_date = #{inexpDate,jdbcType=DATE}
     where user_inexp_uid = #{userInexpUid,jdbcType=VARCHAR}
   </update>
 </mapper>

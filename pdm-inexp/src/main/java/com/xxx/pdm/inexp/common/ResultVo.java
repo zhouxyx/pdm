@@ -10,6 +10,12 @@ public class ResultVo {
 	private Object data;
 
 	
+	public ResultVo(String status, Object data) {
+		super();
+		this.status = status;
+		this.data = data;
+	}
+
 	public ResultVo(String status) {
 		super();
 		this.status = status;

@@ -22,10 +22,8 @@
 
 		<!-- enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" selectByExampleQueryId="false" -->
-		<table tableName="mg_in_exp_icon" domainObjectName="InExpIcon">
-<!-- 			<property name="useActualColumnNames" value="true" /> -->
-		</table>
+<!-- 		<table tableName="mg_in_exp_icon" domainObjectName="InExpIcon"></table> -->
 		<table tableName="mg_user_inexp" domainObjectName="UserInExp"></table>
-		<table tableName="mg_user_inexp_type" domainObjectName="UserInExpType"></table>
+<!-- 		<table tableName="mg_user_inexp_type" domainObjectName="UserInExpType"></table> -->
 	</context>
 </generatorConfiguration>
