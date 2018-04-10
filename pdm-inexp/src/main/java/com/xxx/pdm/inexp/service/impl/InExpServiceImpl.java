@@ -2,6 +2,7 @@ package com.xxx.pdm.inexp.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,12 @@ public class InExpServiceImpl implements InExpService{
 		userInExp.setMonth(DateUtil.getCurrentMonth());
 		userInExp.setInexpDate(new Date());
 		return userInExpMapper.insertSelective(userInExp);
+	}
+
+
+	public List<Map<String, Object>> statUserInExpTypeByMonth(String userUid, Integer month,Integer year) {
+		
+		return userInExpMapper.statUserInExpTypeByMonth(userUid, month, year);
 	}
 
 	

@@ -3,6 +3,8 @@ package com.xxx.pdm.inexp.mapping;
 import com.xxx.pdm.inexp.model.UserInExp;
 import com.xxx.pdm.inexp.model.UserInExpExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserInExpMapper {
@@ -27,4 +29,6 @@ public interface UserInExpMapper {
     int updateByPrimaryKeySelective(UserInExp record);
 
     int updateByPrimaryKey(UserInExp record);
+
+	List<Map<String, Object>> statUserInExpTypeByMonth(@Param("userUid") String userUid, @Param("month") Integer month, @Param("year") Integer year);
 }

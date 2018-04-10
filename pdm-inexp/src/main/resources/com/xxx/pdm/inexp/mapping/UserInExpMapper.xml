@@ -15,6 +15,17 @@
     <result column="inexp_type_name" property="inexpTypeName" jdbcType="VARCHAR" />
     <result column="inexp_date" property="inexpDate" jdbcType="DATE" />
   </resultMap>
+  
+  <select id="statUserInExpTypeByMonth" resultType="map">
+  	SELECT
+		SUM(money) AS sumMoney,
+		inexp_type_name AS inexpTypeName
+	FROM mg_user_inexp 
+	WHERE MONTH = #{month} AND YEAR = #{year} AND user_uid=#{userUid} 
+	GROUP BY inexp_type_name  ORDER BY sumMoney DESC 
+  </select>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
