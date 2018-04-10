@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: pdm-gateway
+server:
+  port: 8888
+  
+  
+zuul:
+  strip-prefix: false
+  routes:
+    api-inexp:
+      path : /api1/**
+      service-id: pdm-inexp 
+    api-user:
+      path : /api2/**
+      service-id: pdm-user     
+    api-plan:
+      path : /api3/**
+      service-id: pdm-plan   
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    
+feign:
+  hystrix:
+    enabled: true       
