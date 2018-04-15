@@ -1,10 +1,8 @@
 spring:
-  application:
-    name: pdm-inexp
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.0.102:3306/pdm?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/pdm?useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
     initialSize: 5
@@ -26,11 +24,3 @@ server:
   tomcat:
     uri-encoding: UTF-8
     max-threads: 1000
-    
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    #将自己的IP注册到Eureka Server中
-    prefer-ip-address: true

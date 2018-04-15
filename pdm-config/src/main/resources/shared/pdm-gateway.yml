@@ -1,0 +1,19 @@
+server:
+  port: 54321
+  
+zuul:
+  strip-prefix: false
+  routes:
+    api-inexp:
+      path : /api/ie/**
+      service-id: pdm-inexp 
+    api-user:
+      path : /api/u/**
+      service-id: pdm-user     
+    api-plan:
+      path : /api/p/**
+      service-id: pdm-plan   
+    
+feign:
+  hystrix:
+    enabled: true   
